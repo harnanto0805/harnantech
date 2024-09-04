@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/logo.png" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <title>Wordpress service - Harnantech</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 offset-lg-3">
+            <h1 class="text-center fw-bold">Web development with Wordpress</h1>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3"><img src="assets/thumb-Wordpress.png" alt="laravel" class="img-fluid" /></div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <p><b>Detail pesanan :</b></p>
+          <form id="productForm">
+            <!-- Nama Bisnismu -->
+            <div class="mb-3">
+              <label for="namaBisnis" class="form-label">Nama Bisnismu:</label>
+              <input type="text" class="form-control" id="namaBisnis" placeholder="Masukkan nama bisnismu" required />
+            </div>
+
+            <!-- Bidang -->
+            <div class="mb-3">
+              <label for="bidangBisnis" class="form-label">Bidang:</label>
+              <select class="form-select" id="bidangBisnis" required>
+                <option value="">Pilih Bidang</option>
+                <option value="FnB">FnB</option>
+                <option value="Travel">Travel</option>
+                <option value="Clothing">Clothing</option>
+                <option value="Digital Agency">Digital Agency</option>
+                <option value="Instansi (sekolah / yayasan)">Instansi (sekolah / yayasan)</option>
+                <option value="Lainnya">Lainnya (masukkan manual)</option>
+              </select>
+            </div>
+
+            <!-- Lainnya (untuk input manual) -->
+            <div class="mb-3" id="bidangLainnya" style="display: none">
+              <label for="bidangLainnyaInput" class="form-label">Bidang Lainnya:</label>
+              <input type="text" class="form-control" id="bidangLainnyaInput" placeholder="Masukkan bidang lain" disabled />
+            </div>
+
+            <!-- Deskripsi Tambahan -->
+            <div class="mb-3">
+              <label for="detailProduk" class="form-label">Deskripsi Tambahan:</label>
+              <textarea class="form-control" id="detailProduk" rows="4" placeholder="Masukkan deskripsi tambahan..." required></textarea>
+            </div>
+
+            <!-- Tombol Kirim -->
+            <button type="submit" class="btn btn-primary">Kirim</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- script form -->
+    <script>
+      document.getElementById("bidangBisnis").addEventListener("change", function () {
+        var bidangLainnya = document.getElementById("bidangLainnya");
+        var bidangLainnyaInput = document.getElementById("bidangLainnyaInput");
+        if (this.value === "Lainnya") {
+          bidangLainnya.style.display = "block";
+          bidangLainnyaInput.disabled = false;
+          bidangLainnyaInput.required = true;
+        } else {
+          bidangLainnya.style.display = "none";
+          bidangLainnyaInput.disabled = true;
+          bidangLainnyaInput.value = "";
+          bidangLainnyaInput.required = false;
+        }
+      });
+
+      document.getElementById("productForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        var namaBisnis = document.getElementById("namaBisnis").value;
+        var bidangBisnis = document.getElementById("bidangBisnis").value;
+        if (bidangBisnis === "Lainnya") {
+          bidangBisnis = document.getElementById("bidangLainnyaInput").value;
+        }
+        var detailProduk = document.getElementById("detailProduk").value;
+
+        var whatsappURL = "https://wa.me/6282220536062?text=" + "Nama Bisnismu: " + encodeURIComponent(namaBisnis) + "%0A" + "Bidang: " + encodeURIComponent(bidangBisnis) + "%0A" + "Deskripsi Tambahan: " + encodeURIComponent(detailProduk);
+
+        window.open(whatsappURL, "_blank");
+      });
+    </script>
+
+    <!-- script form ends -->
+    <script src="js/bootstrap.js"></script>
+  </body>
+</html>
